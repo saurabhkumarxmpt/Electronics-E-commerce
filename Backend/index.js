@@ -2,11 +2,15 @@ require('dotenv').config();
 const express=require('express');
 const PORT=process.env.PORT;
 const database=require('./config/database');
+const userAuthRoutes=require('./routes/userRoutes');
+
 const app=express();
 
 app.use(express.json());
 
 database();
+
+app.use('/user',userAuthRoutes);
 app.get('/',(req,res)=>{
     res.json({message:'this is the home page'});
 });
